@@ -21,7 +21,7 @@ db = SQLAlchemy(app)
 conn_string = os.environ.get('DATABASE_URL', '') or "host='localhost' dbname='ETL' user='etl' password='etl'"
 print ("Connecting to database\n	->%s" % (conn_string))
  
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
+app.config['SQLALCHEMY_DATABASE_URI'] = "host='localhost' dbname='ETL' user='etl' password='etl'"
 conn = psycopg2.connect(conn_string)
  
 	
