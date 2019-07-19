@@ -1003,4 +1003,3 @@ var myMap = L.map("map", {
 L.control.layers(baseMaps, overlayMaps, {
   collapsed: false
 }).addTo(myMap);
-

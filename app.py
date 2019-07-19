@@ -19,6 +19,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']  = os.environ.get('DATABASE_URL', '') or "postgresql://etl:etl@localhost/ETL"
 db = SQLAlchemy(app)
 
+#teststring = {'Key': "pk.eyJ1Ijoibm9yYWxlYmUiLCJhIjoiY2p4aGxvb2ZkMGd6ajN5cXRicDNibG82ciJ9.I70hnoEXQzfAaTYA22WJuw"}
+teststring = {'Key': os.environ.get('KEY', '')}
 
 #################################################
 # Database Setup
@@ -46,7 +48,7 @@ def index():
 
 @app.route("/map")
 def map():
-   return render_template("map.html")
+   return render_template("map.html", teststring=teststring)
 
 @app.route("/names")
 def names():
