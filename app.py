@@ -44,7 +44,9 @@ def index():
     """Return the homepage."""
     return render_template("index.html")
 
-
+@app.route("/map")
+def map():
+   return render_template("map.html")
 
 @app.route("/names")
 def names():
