@@ -6,29 +6,36 @@ import psycopg2
 import psycopg2.extras
 import sys
 
+import sqlalchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine, MetaData, Table, select
 
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI']  = os.environ.get('DATABASE_URL', '') or "postgresql://etl:etl@localhost/ETL"
 db = SQLAlchemy(app)
+
 
 #################################################
 # Database Setup
 #################################################
 
-conn_string = "host='localhost' dbname='ETL' user='etl' password='etl'"
-#conn_string = os.environ.get('DATABASE_URL', '') or "host='localhost' dbname='ETL' user='etl' password='etl'"
+#conn_string = "host='localhost' dbname='ETL' user='etl' password='etl'"
+conn_string = os.environ.get('DATABASE_URL', '') or "host='localhost' dbname='ETL' user='etl' password='etl'"
 print ("Connecting to database\n	->%s" % (conn_string))
  
-#app.config['SQLALCHEMY_DATABASE_URI'] = "host='localhost' dbname='ETL' user='etl' password='etl'"
+
 conn = psycopg2.connect(conn_string)
  
 	
 dict_cur = conn.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
 dict_cur.execute('SELECT * FROM cleaned1_data')
 rec= dict_cur.fetchall()
+
 print(rec[0])
 
 	
