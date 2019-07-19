@@ -12,7 +12,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-
+db = SQLAlchemy(app)
 
 #################################################
 # Database Setup
@@ -21,14 +21,14 @@ app = Flask(__name__)
 conn_string = os.environ.get('DATABASE_URL', '') or "host='localhost' dbname='ETL' user='etl' password='etl'"
 print ("Connecting to database\n	->%s" % (conn_string))
  
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
+#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
 conn = psycopg2.connect(conn_string)
  
 	
 dict_cur = conn.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
-#dict_cur.execute('SELECT * FROM cleaned1_data')
-#rec= dict_cur.fetchall()
-#print(rec[0])
+dict_cur.execute('SELECT * FROM cleaned1_data')
+rec= dict_cur.fetchall()
+print(rec[0])
 
 	
 @app.route("/")
