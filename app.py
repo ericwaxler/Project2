@@ -17,9 +17,11 @@ app = Flask(__name__)
 #################################################
 # Database Setup
 #################################################
+
 conn_string = "host='localhost' dbname='ETL' user='etl' password='etl'"
 print ("Connecting to database\n	->%s" % (conn_string))
  
+#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
 conn = psycopg2.connect(conn_string)
  
 	
