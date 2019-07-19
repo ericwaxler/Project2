@@ -26,9 +26,9 @@ conn = psycopg2.connect(conn_string)
  
 	
 dict_cur = conn.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
-dict_cur.execute('SELECT * FROM cleaned1_data')
-rec= dict_cur.fetchall()
-print(rec[0])
+#dict_cur.execute('SELECT * FROM cleaned1_data')
+#rec= dict_cur.fetchall()
+#print(rec[0])
 
 	
 @app.route("/")
