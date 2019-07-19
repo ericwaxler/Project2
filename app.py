@@ -33,7 +33,7 @@ conn = psycopg2.connect(conn_string)
  
 	
 dict_cur = conn.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
-dict_cur.execute('SELECT * FROM ETL_Table')
+dict_cur.execute('SELECT * FROM \"ETL_Table\"')
 rec= dict_cur.fetchall()
 
 print(rec[0])
