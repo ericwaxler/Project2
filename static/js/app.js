@@ -63,6 +63,7 @@ function buildMetadata(sample) {
       const fert3539 = data.Fertility_35_39;
       const fert4044 = data.Fertility_40_44;
       const fert4549 = data.Fertility_45_49;
+      const birthrate = data.Birth_Rate;
       
       const fertlabels = ['15-19','20-24','25-29','30-34','35-39','40-44','45-49']
       const fertyear1 = [fert1519[0],fert2024[0],fert2529[0],fert3034[0],fert3539[0],fert4044[0],fert4549[0]]
@@ -72,7 +73,7 @@ function buildMetadata(sample) {
 
        var trace1 = {
               x: ['2015', '2016', '2017'],
-              y: Fertility,
+              y: birthrate,
               name: 'Fertility',
               type: 'bar'
             };

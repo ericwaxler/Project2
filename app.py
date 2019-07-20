@@ -107,6 +107,7 @@ def samples(sample):
     fert4044=[]
     fert4549=[]
     fert_total=[]
+    birthrate=[]
     dict={}
 
     for count in range(len(rec)):
@@ -123,6 +124,7 @@ def samples(sample):
          fert4044.append(rec[count][14])
          fert4549.append(rec[count][15])
          fert_total.append(sum(rec[count][9:15]))
+         birthrate.append(rec[count][16])
     dict={"Fertility":Fertility_rate,
           "Happines_score":happines_score,
           "Country":country,
@@ -134,7 +136,8 @@ def samples(sample):
           "Fertility_35_39":fert3539,
           "Fertility_40_44":fert4044,
           "Fertility_45_49":fert4549,
-          "Fertility_Sum":fert_total}
+          "Fertility_Sum":fert_total,
+          "Birth_Rate":birthrate}
     return(jsonify(dict))
 
 @app.route("/samplesforyear/<year>")
