@@ -4,7 +4,7 @@ function buildbubbleCharts(year) {
       const happiness = data.Happines_score;
       const country = data.Country;
       
-    
+      const fsize = data.Fertility*30;
    // Build a Bubble Chart
     var bubbleLayout = {
       title: 'Marker Size',
@@ -23,7 +23,7 @@ function buildbubbleCharts(year) {
         text: country,
         mode: "markers",
         marker: {
-          size: Fertility,
+          size: fsize,
            
           colorscale: "Earth"
           }

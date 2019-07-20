@@ -150,7 +150,7 @@ def samplesforyear(year):
     for count1 in range(len(rec)):
       if rec[count1][7]==int(year):
          print(rec[count1][7])
-         Fertility_rate.append(rec[count1][19])
+         Fertility_rate.append(rec[count1][16])
          happines_score.append(rec[count1][6])
          country.append(rec[count1][1])
       dict2={"Fertility":Fertility_rate,
