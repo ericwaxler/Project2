@@ -81,7 +81,7 @@ function buildMetadata(sample) {
       var trace2 = {
               x: ['2015', '2016', '2017'],
               y: happiness,
-              name: 'Happines',
+              name: 'Happiness',
               type: 'bar'
             };
             
