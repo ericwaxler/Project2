@@ -4,7 +4,8 @@ function buildbubbleCharts(year) {
       const happiness = data.Happines_score;
       const country = data.Country;
       
-      const fsize = data.Fertility*30;
+      const fsize = Fertility.map(function(x) { return x * 7; });
+      
    // Build a Bubble Chart
     var bubbleLayout = {
       title: 'Marker Size',
