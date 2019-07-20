@@ -1,12 +1,47 @@
-  function buildMetadata(sample) {
+function buildbubbleCharts(year) {
+  d3.json(`/samplesforyear/${year}`).then((data) => {
+      const Fertility = data.Fertility;
+      const happiness = data.Happines_score;
+      const country = data.Country;
+      
+    
+   // Build a Bubble Chart
+    var bubbleLayout = {
+      title: 'Marker Size',
+      margin: { t: 0 },
+      hovermode: "closest",
+      xaxis: { title: "Happiness" },
+      yaxis: { title: "Fertility" },
+      height: 600,
+      // width: 600
+      
+    };
+    var bubbleData = [
+      {
+        x: happiness,
+        y: Fertility,
+        text: country,
+        mode: "markers",
+        marker: {
+          size: Fertility,
+           
+          colorscale: "Earth"
+          }
+      }
+    ];
+
+    Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+
+  });
+
+}
+
+function buildMetadata(sample) {
     d3.json(`/samples/${sample}`).then((data) => {
     // Use d3 to select the panel with id of `#sample-metadata`
     var PANEL = d3.select("#sample-metadata");
     // Use `.html("") to clear any existing metadata
     PANEL.html("");
-    // Use `Object.entries` to add each key and value pair to the panel
-    // Hint: Inside the loop, you will need to use d3 to append new
-    // tags for each key-value in the metadata.
     Object.entries(data).forEach(([key, value]) => {
       PANEL.append("h6").text(`${key}: ${value}`);
     });
@@ -33,10 +68,7 @@
       const fertyear2 = [fert1519[1],fert2024[1],fert2529[1],fert3034[1],fert3539[1],fert4044[1],fert4549[1]]
       const fertyear3 = [fert1519[2],fert2024[2],fert2529[2],fert3034[2],fert3539[2],fert4044[2],fert4549[2]]
 
-      console.log(data);
-      console.log(fert1519);
 
-       console.log(sample);
        var trace1 = {
               x: ['2015', '2016', '2017'],
               y: Fertility,
@@ -55,30 +87,6 @@
       var layout = {barmode: 'group'};
             
       Plotly.newPlot('bar', data, layout);
-  
-
-      // Build a Bubble Chart
-    var bubbleLayout = {
-      margin: { t: 0 },
-      hovermode: "closest",
-      xaxis: { title: "Happiness" },
-      yaxis: { title: "Fertility" }
-    };
-    var bubbleData = [
-      {
-        x: happiness,
-        y: Fertility,
-        text: country,
-        mode: "markers",
-        marker: {
-          size: Fertility,
-          // color: ds,
-          colorscale: "Earth"
-        }
-      }
-    ];
-
-    Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 
      //Build a Pie Chart
      var pieData = [
@@ -179,19 +187,27 @@ function init() {
   // Use the list of sample names to populate the select options
   d3.json("/names").then((sampleNames) => {
         sampleNames.forEach((sample) => {
-          console.log(sample.country)
           selector
             .append("option")
             .text(sample)
             .property("value", sample)
         });
+        const firstSample = sampleNames[0];
+        buildCharts(firstSample);
+  });
 
-  // Use the first sample from the list to build the initial plots
-  const firstSample = sampleNames[0];
-  console.log(firstSample)
-  buildCharts(firstSample);
-  //buildMetadata(firstSample);
-});
+  var selector1= d3.select("#selDataset1");
+  d3.json("/years").then((sampleyear) => {
+        sampleyear.forEach((years) => {
+          selector1
+            .append("option")
+            .text(years) 
+            .property("value", years)
+        });
+        const firstSampleyear = sampleyear[0];
+        buildbubbleCharts(firstSampleyear);
+  });
+  
 }
 
 function optionChanged(newSample) {
@@ -199,6 +215,11 @@ function optionChanged(newSample) {
   buildCharts(newSample);
   //buildMetadata(newSample);
 }
+
+function optionChanged2(newSampleyear) {
+  // Fetch new data each time a new sample is selected
+  buildbubbleCharts(newSampleyear);
+};
 
 // Initialize the dashboard
  init();

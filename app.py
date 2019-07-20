@@ -46,9 +46,11 @@ def index():
     """Return the homepage."""
     return render_template("index.html")
 
+
 @app.route("/map")
 def map():
    return render_template("map.html", teststring=teststring)
+
 
 @app.route("/names")
 def names():
@@ -59,7 +61,10 @@ def names():
       row_count += 1
    return(jsonify(country_list))
 
-
+@app.route("/years")
+def years():
+   Year_list=["2015","2016","2017"]
+   return(jsonify(Year_list))
 
 @app.route("/metadata/<sample>")
 def sample_metadata(sample):
@@ -132,6 +137,27 @@ def samples(sample):
           "Fertility_Sum":fert_total}
     return(jsonify(dict))
 
+@app.route("/samplesforyear/<year>")
+def samplesforyear(year):
+    """Return `otu_ids`, `otu_labels`,and `sample_values`."""
+    count1 =0 
+    Fertility_rate=[]
+    happines_score=[]
+    country=[]
+    
+    dict2={}
+
+    for count1 in range(len(rec)):
+      if rec[count1][7]==int(year):
+         print(rec[count1][7])
+         Fertility_rate.append(rec[count1][19])
+         happines_score.append(rec[count1][6])
+         country.append(rec[count1][1])
+      dict2={"Fertility":Fertility_rate,
+          "Happines_score":happines_score,
+          "Country":country}
+          
+    return(jsonify(dict2))
 
 if __name__ == "__main__":
     app.run()
