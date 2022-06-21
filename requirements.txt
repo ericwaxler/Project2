@@ -18,7 +18,7 @@ jupyter-core==4.5.0
 MarkupSafe==1.0
 mysql-connector-python==8.0.16
 nbformat==4.4.0
-numpy==1.14.5
+numpy==1.22.0
 pandas==0.23.3
 pg8000==1.12.5
 plotly==3.10.0
